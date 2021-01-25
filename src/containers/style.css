@@ -1,0 +1,53 @@
+table {
+  margin: 1em 0;
+  display: flex;
+  flex-direction: column;
+}
+
+thead, tr {
+  display: flex;
+  width: 100%;
+  display: flex;
+  
+}
+
+th, td {
+  width: 20%;
+  text-align: start;
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+tr:nth-child(even){
+  background-color: #f2f2f2;
+}
+
+th {
+  text-align: start;
+  background-color: #4cafa6;
+  color: white
+}
+   
+table header {
+  display: flex;
+  background-color: rgb(238, 238, 238);
+}
+
+table header div { 
+  cursor: pointer;
+}
+
+.button {
+  background-color: #4cafa6;
+  color: white;
+  border: 1px solid  #4cafa6;
+  border-radius: 2px;
+  padding: 8px 16px;
+  margin-left: 10px;
+}
+
+.input {
+  border: 1px solid  #ddd;
+  border-radius: 2px;
+  padding: 8px; 
+}

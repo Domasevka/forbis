@@ -1,0 +1,13 @@
+.menu__link  {
+  text-decoration: none;
+  color:#3d8a83;
+}
+
+.menu__link:hover  {
+  text-decoration: none;
+  color:#4cafa6;
+}
+
+.menu__link:last-child  {
+  margin-left: 10px;
+}
