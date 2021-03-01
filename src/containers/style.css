@@ -33,6 +33,11 @@ table header {
   background-color: rgb(238, 238, 238);
 }
 
+table header tr {
+  display: flex;
+  background-color: #6ab2e7;
+}
+
 table header div { 
   cursor: pointer;
 }

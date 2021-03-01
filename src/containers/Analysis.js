@@ -66,16 +66,50 @@ class Analysis extends Component {
     } 
 
     findLongestPath = (elementsObject, parseXmlString) => {
-      const maxElement = this.findCommonTag(elementsObject)
-      let htmlElement = parseXmlString.getElementsByTagName(maxElement);
-      const parents  = [];
-      while (htmlElement.parentNode && htmlElement.parentNode.nodeName.toLowerCase() != 'body') {
-        htmlElement = htmlElement.parentNode;
-        parents.push(htmlElement);
-          
-      }
-      console.log('parents', parents)
-      return parents.lengh // || 'null'
+      const commonlyUsedTag = this.findCommonTag(elementsObject)
+
+      let longestNode = [];
+      let longestNodeCount = 0;
+      
+      const getNodeTree = (node) => {
+        let currentTagCount = 0;
+  
+        if (node.nodeName === commonlyUsedTag.tagName) {
+          currentTagCount += 1;
+        }
+  
+        if (node.hasChildNodes()) {
+          let childrenTree = [];
+          let childrenTagCount = 0;
+  
+          for (let i = 0; i < node.childNodes.length; i += 1) {
+            const { tree, tagCount } = getNodeTree(node.childNodes[i]);
+  
+            if (childrenTagCount <= tagCount) {
+              childrenTagCount = currentTagCount + tagCount;
+              childrenTree = [node.nodeName, ...tree];
+            }
+  
+            if (longestNodeCount <= childrenTagCount) {
+              longestNodeCount = childrenTagCount;
+              longestNode = childrenTree;
+            }
+          }
+  
+          return {
+            tree: childrenTree,
+            tagCount: childrenTagCount,
+          };
+        }
+  
+        return {
+          tree: [node.nodeName],
+          tagCount: currentTagCount,
+        };
+      };
+      getNodeTree(parseXmlString.documentElement);
+  
+      return (longestNode, longestNodeCount);
     }
  
     render(){
@@ -108,8 +142,12 @@ class Analysis extends Component {
             <p>2. Find the most commonly used tag.</p>
             <p>{this.findCommonTag(elementsObject)}</p>
 
-            <p>3. Find the longest path in the document tree where the most popular tag is used the most times.</p>
-            <p>{this.findLongestPath(elementsObject, parseXmlString)}</p>
+            {htmlDocument &&
+              <>
+                <p>3. Find the longest path in the document tree where the most popular tag is used the most times.</p>
+                <p>{this.findLongestPath(elementsObject, parseXmlString)}</p>
+              </>
+            }
           </div>
         </>
       )

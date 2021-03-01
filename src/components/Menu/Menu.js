@@ -7,10 +7,9 @@ class Menu extends Component {
   render(){
     return(
       <div>
-        <Link to="/" className='menu__link'>Currencies</Link>
+        <Link to="/" className='menu__link'>Currencies </Link>
         <Link to="/analysis" className='menu__link'>Analysis</Link>
       </div>
-
     )
   }
 }
